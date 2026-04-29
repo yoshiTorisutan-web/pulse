@@ -53,3 +53,48 @@ body::before{
 /* Drag active state */
 body.dragging{cursor:col-resize!important;}
 body.dragging *{user-select:none!important;}
+
+/* ═════════════════════════════════════════════════
+   RESPONSIVE MEDIA QUERIES
+   ═════════════════════════════════════════════════ */
+
+/* Mobile devices: up to 768px */
+@media (max-width: 768px) {
+  :root {
+    --lp: 0px;
+    --hh: 48px;
+  }
+
+  /* Adjust text sizes for smaller screens */
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Small mobile devices: up to 480px */
+@media (max-width: 480px) {
+  :root {
+    --hh: 44px;
+  }
+
+  html {
+    font-size: 13px;
+  }
+}
+
+/* Touch-friendly adjustments */
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover effects on touch devices */
+  .hbtn:hover {
+    background: var(--bg3);
+    border-color: var(--border2);
+  }
+
+  .send-btn:hover {
+    transform: none;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}

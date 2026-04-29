@@ -78,6 +78,51 @@ function bindHeader() {
     S.respView = btn.dataset.rv;
     renderRespBody();
   });
+
+  // Mobile menu toggle
+  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+  const app = document.getElementById('app');
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('open');
+      app.classList.toggle('sidebar-open');
+      mobileMenuToggle.classList.toggle('active');
+    });
+
+    // Close sidebar when clicking on an item (on mobile)
+    document.addEventListener('click', e => {
+      const sidebar = document.querySelector('.sidebar');
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile && sidebar.classList.contains('open')) {
+        // Close if clicking inside sidebar items
+        if (e.target.closest('.sidebar-body') || e.target.closest('[data-stab]')) {
+          if (!e.target.closest('.mobile-menu-toggle')) {
+            sidebar.classList.remove('open');
+            app.classList.remove('sidebar-open');
+            mobileMenuToggle.classList.remove('active');
+          }
+        }
+        // Close if clicking outside sidebar and menu toggle (including overlay)
+        else if (!e.target.closest('.sidebar') && !e.target.closest('.mobile-menu-toggle')) {
+          sidebar.classList.remove('open');
+          app.classList.remove('sidebar-open');
+          mobileMenuToggle.classList.remove('active');
+        }
+      }
+    });
+
+    // Close sidebar on window resize to desktop
+    window.addEventListener('resize', () => {
+      const sidebar = document.querySelector('.sidebar');
+      if (window.innerWidth > 768) {
+        sidebar.classList.remove('open');
+        app.classList.remove('sidebar-open');
+        mobileMenuToggle.classList.remove('active');
+      }
+    });
+  }
 }
 
 // ── Request Bar ────────────────────────────────────
@@ -115,26 +160,62 @@ function setStatus(state, text) {
 function bindResizeSplit() {
   const handle = document.getElementById('resizeHandle');
   const split = document.getElementById('contentSplit');
-  let dragging = false, startX = 0, startW = 0;
+  let dragging = false, startPos = 0, startSize = 0, vertical = false;
 
-  handle.addEventListener('mousedown', e => {
+  function onDragStart(clientX, clientY) {
+    vertical = window.innerWidth <= 768;
     dragging = true;
-    startX = e.clientX;
-    const cols = getComputedStyle(split).gridTemplateColumns.split(' ');
-    startW = parseFloat(cols[0]);
+    if (vertical) {
+      startPos = clientY;
+      const rows = getComputedStyle(split).gridTemplateRows.split(' ');
+      startSize = parseFloat(rows[0]);
+    } else {
+      startPos = clientX;
+      const cols = getComputedStyle(split).gridTemplateColumns.split(' ');
+      startSize = parseFloat(cols[0]);
+      document.body.classList.add('dragging');
+    }
     handle.classList.add('dragging');
-    document.body.classList.add('dragging');
-  });
-  document.addEventListener('mousemove', e => {
+  }
+
+  function onDragMove(clientX, clientY) {
     if (!dragging) return;
-    const newW = Math.max(220, Math.min(split.offsetWidth - 220, startW + (e.clientX - startX)));
-    split.style.gridTemplateColumns = `${newW}px 4px 1fr`;
-  });
-  document.addEventListener('mouseup', () => {
+    if (vertical) {
+      const newH = Math.max(120, Math.min(split.offsetHeight - 120, startSize + (clientY - startPos)));
+      split.style.gridTemplateRows = `${newH}px 12px 1fr`;
+    } else {
+      const newW = Math.max(220, Math.min(split.offsetWidth - 220, startSize + (clientX - startPos)));
+      split.style.gridTemplateColumns = `${newW}px 4px 1fr`;
+    }
+  }
+
+  function onDragEnd() {
     if (!dragging) return;
     dragging = false;
     handle.classList.remove('dragging');
     document.body.classList.remove('dragging');
+  }
+
+  handle.addEventListener('mousedown', e => onDragStart(e.clientX, e.clientY));
+  document.addEventListener('mousemove', e => onDragMove(e.clientX, e.clientY));
+  document.addEventListener('mouseup', onDragEnd);
+
+  handle.addEventListener('touchstart', e => {
+    e.preventDefault();
+    const t = e.touches[0];
+    onDragStart(t.clientX, t.clientY);
+  }, { passive: false });
+  document.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    e.preventDefault();
+    const t = e.touches[0];
+    onDragMove(t.clientX, t.clientY);
+  }, { passive: false });
+  document.addEventListener('touchend', onDragEnd);
+
+  window.addEventListener('resize', () => {
+    split.style.gridTemplateColumns = '';
+    split.style.gridTemplateRows = '';
   });
 }
 

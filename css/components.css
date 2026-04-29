@@ -193,3 +193,290 @@
 .snip-btn:hover{border-color:var(--border2);color:var(--text2);}
 .snip-btn.active{background:var(--amber3);border-color:rgba(245,166,35,.3);color:var(--amber);}
 .snippet-code{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:16px;font-family:var(--mono);font-size:0.71rem;line-height:1.7;color:var(--text2);white-space:pre-wrap;word-break:break-word;max-height:340px;overflow-y:auto;}
+
+/* ═════════════════════════════════════════════════
+   MOBILE RESPONSIVE COMPONENTS
+   ═════════════════════════════════════════════════ */
+
+/* Mobile menu toggle */
+.mobile-menu-toggle {
+  display: none;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r);
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--text3);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.mobile-menu-toggle:hover {
+  border-color: var(--border3);
+  color: var(--amber);
+}
+
+.mobile-menu-toggle.active {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: #000;
+}
+
+/* Tablet responsive: 768px and below */
+@media (max-width: 768px) {
+  .ptab {
+    padding: 8px 10px;
+    font-size: 0.6rem;
+  }
+
+  .ptab-count {
+    height: 14px;
+    min-width: 14px;
+    font-size: 0.5rem;
+    padding: 0 3px;
+    margin-left: 3px;
+  }
+
+  .status-indicator {
+    font-size: 0.6rem;
+    gap: 5px;
+  }
+
+  .status-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .method-pill {
+    font-size: 0.55rem;
+    padding: 2px 4px;
+  }
+
+  .coll-title-name {
+    font-size: 0.58rem;
+  }
+
+  .req-item {
+    padding: 4px 6px;
+    gap: 5px;
+  }
+
+  .req-method {
+    font-size: 0.55rem;
+  }
+
+  .req-name {
+    font-size: 0.68rem;
+  }
+
+  .hist-item {
+    padding: 6px 6px;
+  }
+
+  .hist-url {
+    font-size: 0.6rem;
+  }
+
+  .toast {
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 14px;
+    font-size: 0.65rem;
+  }
+
+  .info-banner {
+    margin: 8px;
+    padding: 10px 12px;
+    font-size: 0.65rem;
+  }
+
+  .kv-row {
+    grid-template-columns: 28px 1fr 1fr 28px;
+  }
+
+  .kv-cell input {
+    padding: 6px 8px;
+    font-size: 0.68rem;
+  }
+
+  .kv-check input[type=checkbox] {
+    width: 12px;
+    height: 12px;
+  }
+
+  .kv-del {
+    width: 28px;
+    font-size: 0.6rem;
+  }
+
+  .kv-add-row {
+    padding: 6px 10px;
+    font-size: 0.63rem;
+  }
+
+  .body-type-tabs {
+    padding: 6px 10px;
+    gap: 2px;
+  }
+
+  .btype-btn {
+    padding: 3px 8px;
+    font-size: 0.6rem;
+  }
+
+  .body-actions {
+    padding: 5px 10px;
+    gap: 4px;
+  }
+
+  .body-action-btn {
+    padding: 2px 8px;
+    font-size: 0.6rem;
+  }
+
+  .body-textarea {
+    padding: 12px 14px;
+    font-size: 0.7rem;
+  }
+
+  .auth-wrap {
+    padding: 12px;
+  }
+
+  .auth-type-select {
+    font-size: 0.68rem;
+    padding: 6px 24px 6px 8px;
+    margin-bottom: 10px;
+  }
+
+  .auth-field {
+    padding: 7px 10px;
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+  }
+
+  .auth-label {
+    font-size: 0.58rem;
+    margin-bottom: 4px;
+  }
+
+  .snippet-wrap {
+    padding: 10px;
+  }
+
+  .snippet-lang-tabs {
+    margin-bottom: 8px;
+  }
+
+  .snip-btn {
+    padding: 3px 8px;
+    font-size: 0.6rem;
+  }
+
+  .snippet-code {
+    padding: 12px;
+    font-size: 0.67rem;
+    max-height: 280px;
+  }
+}
+
+/* Small phones: 480px and below */
+@media (max-width: 480px) {
+  .ptab {
+    padding: 6px 8px;
+    font-size: 0.55rem;
+  }
+
+  .coll-section {
+    margin-bottom: 12px;
+  }
+
+  .req-item {
+    padding: 3px 5px;
+    gap: 4px;
+  }
+
+  .req-method {
+    font-size: 0.52rem;
+    min-width: 35px;
+  }
+
+  .req-name {
+    font-size: 0.65rem;
+  }
+
+  .req-del {
+    width: 14px;
+    height: 14px;
+  }
+
+  .hist-item {
+    padding: 5px 6px;
+    margin-bottom: 2px;
+  }
+
+  .toast {
+    bottom: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    font-size: 0.6rem;
+  }
+
+  .kv-row {
+    grid-template-columns: 24px 1fr 1fr 24px;
+  }
+
+  .kv-cell input {
+    padding: 5px 6px;
+    font-size: 0.65rem;
+  }
+
+  .kv-check input[type=checkbox] {
+    width: 11px;
+    height: 11px;
+  }
+
+  .kv-del {
+    width: 24px;
+    font-size: 0.55rem;
+  }
+
+  .body-textarea {
+    padding: 10px 12px;
+    font-size: 0.67rem;
+  }
+
+  .auth-wrap {
+    padding: 10px;
+  }
+
+  .snippet-wrap {
+    padding: 8px;
+  }
+
+  .snippet-code {
+    padding: 10px;
+    font-size: 0.65rem;
+    max-height: 250px;
+  }
+}
+
+/* Extra small: 360px and below */
+@media (max-width: 360px) {
+  .coll-title-name {
+    font-size: 0.55rem;
+  }
+
+  .req-name {
+    font-size: 0.63rem;
+  }
+
+  .body-textarea {
+    font-size: 0.65rem;
+  }
+}

@@ -123,3 +123,348 @@
 }
 .resize-handle:hover,.resize-handle.dragging{background:rgba(245,166,35,.08);}
 .resize-handle:hover::after,.resize-handle.dragging::after{background:var(--amber);}
+
+/* ═════════════════════════════════════════════════
+   RESPONSIVE DESIGN FOR MOBILE
+   ═════════════════════════════════════════════════ */
+
+/* Tablet and below: 768px */
+@media (max-width: 768px) {
+  /* App grid - remove sidebar from main flow */
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  /* Sidebar - position as overlay/drawer */
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: var(--hh);
+    width: 100%;
+    max-width: 280px;
+    height: calc(100vh - var(--hh));
+    z-index: 99;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 16px rgba(0, 0, 0, 0.5);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Overlay backdrop for sidebar */
+  .app::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 98;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .app.sidebar-open::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Show mobile menu toggle in header */
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+
+  /* Header adjustments */
+  .header {
+    padding: 0 8px;
+    gap: 6px;
+    overflow-x: auto;
+    flex-wrap: wrap;
+  }
+
+  .header-right {
+    margin-left: auto;
+    gap: 6px;
+  }
+
+  /* Hide less important elements on mobile */
+  .logo-sub {
+    display: none;
+  }
+
+  .vsep {
+    height: 16px;
+    margin: 0 1px;
+  }
+
+  .kbd {
+    display: none;
+  }
+
+  /* Reduce env-label visibility */
+  .env-label {
+    display: none;
+  }
+
+  .env-wrap {
+    gap: 4px;
+  }
+
+  .hbtn {
+    padding: 5px 10px;
+    font-size: 0.65rem;
+    height: 28px;
+  }
+
+  .hbtn svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  /* Request bar responsive */
+  .req-bar {
+    padding: 8px 10px;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .method-select {
+    width: 80px;
+    font-size: 0.65rem;
+    height: 34px;
+  }
+
+  .url-input {
+    font-size: 0.65rem;
+    height: 34px;
+    padding: 0 32px 0 10px;
+  }
+
+  .send-btn {
+    height: 34px;
+    padding: 0 16px;
+    font-size: 0.65rem;
+    gap: 6px;
+  }
+
+  .save-req-btn {
+    height: 34px;
+    width: 34px;
+    font-size: 0.6rem;
+  }
+
+  /* URL wrap should flex */
+  .url-wrap {
+    flex: 1;
+    min-width: 100px;
+  }
+
+  /* Content split panes - stack vertically on mobile */
+  .content-split {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 12px 1fr;
+  }
+
+  /* Resize handle - change orientation */
+  .resize-handle {
+    cursor: row-resize;
+  }
+
+  .resize-handle::after {
+    width: 28px;
+    height: 2px;
+  }
+
+  /* Pane adjustments */
+  .pane {
+    min-height: 200px;
+  }
+
+  .pane-tabs {
+    padding: 0 2px;
+  }
+
+  /* Better touch target for resize handle on mobile */
+  .resize-handle {
+    min-height: 12px;
+    padding: 4px 0;
+  }
+}
+
+/* Small phones: 480px and below */
+@media (max-width: 480px) {
+  /* Even more compact header */
+  .header {
+    padding: 0 6px;
+    gap: 4px;
+  }
+
+  .logo {
+    margin-right: 2px;
+  }
+
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+
+  .logo-text {
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+  }
+
+  .vsep {
+    margin: 0;
+  }
+
+  .hbtn {
+    padding: 4px 8px;
+    font-size: 0.6rem;
+    height: 26px;
+    gap: 4px;
+  }
+
+  .hbtn svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Hide button text on very small screens, keep icons only */
+  .hbtn span {
+    display: none;
+  }
+
+  .hbtn svg {
+    margin: 0;
+  }
+
+  /* Request bar - stack items */
+  .req-bar {
+    padding: 6px 8px;
+    gap: 4px;
+  }
+
+  .method-select {
+    width: 65px;
+    font-size: 0.6rem;
+    height: 32px;
+    padding: 0 24px 0 8px;
+  }
+
+  .url-input {
+    font-size: 0.6rem;
+    height: 32px;
+    padding: 0 28px 0 8px;
+  }
+
+  .send-btn {
+    height: 32px;
+    padding: 0 12px;
+    font-size: 0.6rem;
+  }
+
+  .send-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .save-req-btn {
+    height: 32px;
+    width: 32px;
+  }
+
+  .url-wrap {
+    min-width: 80px;
+  }
+
+  /* Sidebar narrower on small phones */
+  .sidebar {
+    max-width: 240px;
+  }
+
+  .sidebar-search input {
+    font-size: 0.65rem;
+    padding: 5px 8px;
+  }
+
+  .stab {
+    padding: 8px 4px;
+    font-size: 0.55rem;
+  }
+
+  /* Panes minimum height for small screens */
+  .pane {
+    min-height: 150px;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  :root {
+    --hh: 40px;
+  }
+
+  .req-bar {
+    padding: 6px 8px;
+  }
+
+  .pane {
+    min-height: 100px;
+  }
+
+  .header {
+    padding: 0 6px;
+  }
+
+  .method-select {
+    height: 30px;
+  }
+
+  .url-input {
+    height: 30px;
+  }
+
+  .send-btn {
+    height: 30px;
+  }
+}
+
+/* Extra small devices: 360px and below */
+@media (max-width: 360px) {
+  .header {
+    padding: 0 4px;
+    gap: 2px;
+  }
+
+  .logo-mark {
+    width: 24px;
+    height: 24px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .method-select {
+    width: 55px;
+    padding: 0 20px 0 6px;
+  }
+
+  .url-input {
+    padding: 0 24px 0 6px;
+  }
+
+  .send-btn {
+    padding: 0 8px;
+  }
+
+  .url-wrap {
+    min-width: 60px;
+  }
+
+  .sidebar {
+    max-width: 200px;
+  }
+}
